@@ -1,5 +1,5 @@
 // --- CONFIGURACIÓN Y ESTADO GLOBAL ---
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5000/miner';
 let wordFrequencies = {};
 let eventSource = null;
 let chart = null;
@@ -61,7 +61,7 @@ function processIncomingWords(wordsArray) {
 }
 
 function updateChartData() {
-    const N = Parser.parseInt(inputTopN.value) || 10;
+    const N = Number.parseInt(inputTopN.value) || 10;
     const sortedEntries = Object.entries(wordFrequencies)
         .sort((a, b) => b[1] - a[1])
         .slice(0, N);
@@ -79,7 +79,7 @@ function updateChartData() {
 }
 
 async function startMining() {
-    const topNValue = Parser.parseInt(inputTopN.value) || 10;
+    const topNValue = Number.parseInt(inputTopN.value) || 10;
     const language = 'python';
 
     try {
