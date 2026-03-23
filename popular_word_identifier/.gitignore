@@ -1,0 +1,8 @@
+# --- Token ---
+.env
+
+# --- Archivos Temporales del Miner ---
+temp_data/
+
+# --- Archivos de VSCode ---
+.vscode/
