@@ -4,5 +4,14 @@
 # --- Archivos Temporales del Miner ---
 temp_data/
 
+# --- Entorno virtual ---
+venv/
+.venv/
+env/
+bin/
+lib/
+share/
+pyvenv.cfg
+
 # --- Archivos de VSCode ---
 .vscode/
