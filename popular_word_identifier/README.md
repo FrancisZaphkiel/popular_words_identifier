@@ -6,8 +6,15 @@ El objetivo de este proyecto es proporcionar una herramienta que extraiga las pa
 
 ## Herrramientas a utilizar
 
-- Para el componente **miner** se utilizará **Python** para obtener los enlaces de los repositorios, los archivos .java y .py de estos, y finalmente extraer las palabras de los nombres de las funciones y métodos.
-- Para el componente **visualizer** se utilizará **Javascript** para mostrar un top de cantidad configurable de las palabras más utilizadas que se actualiza en tiempo real entre más palabras entregue el componente miner.
+- Para el componente **miner** se utilizará:
+  - **Python** para la extracción principal de GitHub (archivos, enlaces y palabras de funciones y métodos).
+  - **Flask** y **Flask-CORS** para la creación de la API REST que comunica al miner con el frontend de manera segura.
+  - **Multithreading** y **Queue (Colas)** para lograr una ejecución concurrente entre el servidor y el proceso de minería, pasando mensajes libremente.
+  - **Python-dotenv** para el manejo de credenciales mediante variables de entorno.
+- Para el componente **visualizer** se utilizará:
+  - **JavaScript** (Vanilla) y HTML/CSS para la interfaz de usuario.
+  - **Chart.js** para la renderización de los gráficos de barras, mostrando las palabras más utilizadas.
+  - **Server-Sent Events (SSE)** para mantener una conexión en tiempo real unidireccional, actualizando el "Top N" sin necesidad de recargar la página.
 
 ## Arquitectura del proyecto
 
