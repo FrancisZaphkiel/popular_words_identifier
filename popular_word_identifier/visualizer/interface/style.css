@@ -1,0 +1,91 @@
+:root {
+    --bg-color: #1a1c23;
+    --card-color: #24262d;
+    --text-main: #e5e7eb;
+    --text-sub: #9e9e9e;
+    --color-start: #10b981;
+    --color-stop: #ef4444;
+    --color-disabled: #374151;
+    --color-disabled-text: #9ca3af;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-sub);
+    margin-bottom: 2rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+input[type="number"] {
+    background: var(--card-color);
+    border: 1px solid var(--color-disabled);
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    width: 100px;
+    outline: none;
+}
+
+button {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-start {
+    background-color: var(--color-start);
+    color: white;
+}
+
+.btn-start.running {
+    background-color: var(--color-disabled);
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+}
+
+.btn-stop {
+    background-color: var(--color-stop);
+    color: white;
+}
+
+.btn-stop.inactive {
+    background-color: var(--color-disabled);
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+}
+
+.chart-container {
+    background-color: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}

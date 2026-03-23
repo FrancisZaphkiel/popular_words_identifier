@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Word Identifier</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Popular Word Identifier</h1>
+            <p class="subtitle">Ingresa el número de palabras populares que quieras ver</p>
+        </header>
+
+        <section class="controls">
+            <input type="number" id="topN" min="1" step="1" value="10" placeholder="Ej: 10">
+            <button id="btnStart" class="btn-start">Iniciar</button>
+            <button id="btnStop" class="btn-stop inactive" disabled>Detener</button>
+        </section>
+
+        <main class="chart-container">
+            <canvas id="wordChart"></canvas>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
