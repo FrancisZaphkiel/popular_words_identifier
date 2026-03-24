@@ -3,8 +3,11 @@ import re
 import os
 
 class NameExtractor:
-    def __init__(self, storage_path="../../temp_data"):
-        self.storage_path = storage_path
+    def __init__(self, storage_path=None):
+        if storage_path is None:
+            self.storage_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../temp_data'))
+        else:
+            self.storage_path = storage_path
 
     def extract_from_storage(self):
         all_names = []
