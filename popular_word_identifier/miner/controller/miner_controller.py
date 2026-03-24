@@ -4,12 +4,13 @@ import threading
 import queue
 import json
 import time
+import os
 from dotenv import load_dotenv
 
-from getter_repo.repo_finder import RepoMiner
-from getter_files.files_downloader import FileDownloader
-from parser.getter_names import NameExtractor
-from convert.word_splitter import WordSplitter
+from miner.getter_repo.repo_finder import RepoMiner
+from miner.getter_files.files_downloader import FileDownloader
+from miner.parser.name_extractor import NameExtractor
+from miner.convert.word_splitter import WordSplitter
 
 app = Flask(__name__)
 CORS(app)
