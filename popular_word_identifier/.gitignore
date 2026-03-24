@@ -1,9 +1,6 @@
 # --- Token ---
 .env
 
-# --- Archivos Temporales del Miner ---
-temp_data/
-
 # --- Entorno virtual ---
 venv/
 .venv/
@@ -12,6 +9,9 @@ bin/
 lib/
 share/
 pyvenv.cfg
+
+# --- Cache ---
+__pycache__/
 
 # --- Archivos de VSCode ---
 .vscode/
