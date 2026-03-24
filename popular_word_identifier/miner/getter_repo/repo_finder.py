@@ -42,5 +42,14 @@ class RepoMiner:
         self.is_running = False
 
     def _fetch(self, url, token):
-        # ... lógica de búsqueda ...
-        pass
+        headers = {"User-Agent": "Miner-Visualizador-App"}
+        if token:
+            headers["Authorization"] = f"token {token}"
+            
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except Exception as e:
+            print(f"Error HTTP en _fetch: {e}")
+            return None
