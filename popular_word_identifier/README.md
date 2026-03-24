@@ -29,3 +29,18 @@ El objetivo de este proyecto es proporcionar una herramienta que extraiga las pa
     └── /visualizer             # Componente de Visualización (JavaScript)
         ├── /interface          # UI para control de procesos y gráficas
         └── /word_processor     # Procesamiento de frecuencias y lógica de ranking
+
+## Ejecución con Docker
+
+1. **Configurar las variables de entorno (Opcional pero recomendado para operar con mayor número de peticiones)**
+   Crea un archivo llamado `.env` en la raíz del proyecto y añade tu token de GitHub para evitar los límites de peticiones por hora:
+   ```env
+   GITHUB_TOKEN=token_sin_comillas
+   ```
+2. **Construir y levantar los servicios**
+   Abre una terminal en la raíz del proyecto y ejecuta:
+   ```bash
+   docker compose up --build
+   ```
+3. **Acceder a la Interfaz Web**
+   Desde el navegador ingresa a **`http://localhost:8080/interface/index.html`**.
