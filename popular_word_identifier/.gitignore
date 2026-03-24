@@ -10,6 +10,9 @@ lib/
 share/
 pyvenv.cfg
 
+# --- Datos temporales ---
+temp_data/
+
 # --- Cache ---
 __pycache__/
 

@@ -17,18 +17,22 @@ CORS(app)
 
 # El queue pasa las palabras del hilo minero al hilo del servidor web de forma segura
 word_queue = queue.Queue()
-miner_thread = None
-
-miner = RepoMiner()
-downloader = FileDownloader()
-extractor = NameExtractor()
-splitter = WordSplitter()
+active_miners = []
+mining_threads = []
+is_globally_running = False
 
 load_dotenv()
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 def mining_pipeline(language, token):
+    miner = RepoMiner()
+    downloader = FileDownloader()
+    extractor = NameExtractor()
+    splitter = WordSplitter()
+    
+    active_miners.append(miner)
+
     miner.is_running = True
     miner.current_page = 1
     miner.last_star_count = 1000000
@@ -76,23 +80,30 @@ def mining_pipeline(language, token):
 
 @app.route('/miner/start', methods=['POST'])
 def start_mining():
-    global miner_thread
-    data = request.json
-    language = data.get('language', 'python')
+    global is_globally_running, active_miners, mining_threads
     
-    if miner.is_running:
+    if is_globally_running:
         return jsonify({"status": "error", "message": "El minero ya está en ejecución."}), 400
 
-    miner_thread = threading.Thread(target=mining_pipeline, args=(language, GITHUB_TOKEN))
-    miner_thread.daemon = True
-    miner_thread.start()
+    is_globally_running = True
+    active_miners.clear()
+    mining_threads.clear()
+
+    for lang in ['python', 'java']:
+        t = threading.Thread(target=mining_pipeline, args=(lang, GITHUB_TOKEN))
+        t.daemon = True
+        t.start()
+        mining_threads.append(t)
     
-    return jsonify({"status": "success", "message": f"Minería iniciada para {language}"})
+    return jsonify({"status": "success", "message": "Minería concurrente iniciada para python y java"})
 
 @app.route('/miner/stop', methods=['POST'])
 def stop_mining():
-    miner.stop()
-    return jsonify({"status": "success", "message": "Señal de detención enviada al minero."})
+    global is_globally_running
+    for miner in active_miners:
+        miner.stop()
+    is_globally_running = False
+    return jsonify({"status": "success", "message": "Señal de detención enviada a los mineros."})
 
 # --- ENDPOINT SSE (Server-Sent Events) ---
 
@@ -109,4 +120,4 @@ def stream_words():
     return Response(event_stream(), mimetype="text/event-stream")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True, use_reloader=False)
