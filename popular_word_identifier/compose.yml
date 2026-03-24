@@ -1,0 +1,18 @@
+services:
+  miner:
+    build:
+      context: ./miner
+    ports:
+      - "5000:5000"
+    environment:
+      # Obtiene el GITHUB_TOKEN desde el archivo .env del host si es que está.
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+    volumes:
+      # Se mapea la carpeta local temp_data con la ruta /app/temp_data dentro del contenedor.
+      - ./temp_data:/app/temp_data
+
+  visualizer:
+    build:
+      context: ./visualizer
+    ports:
+      - "8080:80"
